@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Roboto&family=Spectral+SC:wght@800&display=swap"
+        rel="stylesheet">
+    <title>Script Writer</title>
+    <script src="localBrowser.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="titleBar.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="titleBar">
+            <div class="iconTitleBar">
+                <img src="Images/logo.png" alt="icon" width="120" height="60" />
+            </div>
+            <button id="closeBtn" class="closeTitleBar" onclick="Close()">X</button>
+        </div>
+        <div class="container" id="container">
+            <div class="inputScreen" id="inputScreen">
+                <form onsubmit="UserDataSubmit(event)">
+                    <div class="form__group">
+                        <input type="input" class="form__field" placeholder="" name="revivedName" id='revivedName'
+                            onclick="EnableButton('revBtn')" required />
+                        <label id="revLab" for="revivedName" class="form__label">Reviewed By</label>
+                    </div>
+                    <div class="form__group version">
+                        <input type="number" step="0.1" class="form__field version" placeholder="" name="versionName"
+                            id='versionName' onclick="EnableButton('revBtn')" required />
+                        <label id="verLab" for="versionName" class="form__label version">Version</label>
+                    </div>
+                    <div class="nextButton" id="revBtn">
+                        <button class="link link--arrowed" disabled>Next
+                            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                viewBox="0 0 32 32">
+                                <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round"
+                                    stroke-miterlimit="10">
+                                    <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                    <path class="arrow-icon--arrow" d="M12 30 L24 16 12 2">
+                                    </path>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!--client screen-->
+            <div class="clientScreen" id="clientScreen">
+                <div class="slider">
+                    <span id="textSliderLeft" class="sliderText textSliderLeft activeTextLeft">
+                        PREDEFINED
+                    </span>
+                    <input type="checkbox" id="switch" class="switchClient" onchange="switchClientCheckbox()" /><label
+                        for="switch">Toggle</label>
+                    <span id="textSliderRight" class="sliderText textSliderRight">
+                        CUSTOM
+                    </span>
+                </div>
+                <div class="predefined show" id="predefined">
+                    <div class="grid">
+                        <div class="grid__item" onclick="clientClicked({name: 'Johnson & Johnson', url: `https:\/\/jnj2-imp.tbs.aon.com`})">
+                            <img class="card__img" src="./Images/Clients/FYBLogo2.png" alt="jnj">
+                            <span class="card__span">IMP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom hide" id="custom">
+                    <form onsubmit="UserDataSubmitStepTwo(event)">
+                        <div class="form__group">
+                            <input type="input" class="form__field" placeholder="" name="clientName" id='clientName'
+                                onclick="EnableButton('clientBtn')" required />
+                            <label id="clLab" for="clientName" class="form__label">Client Name</label>
+                        </div>
+                        <div class="form__group version">
+                            <input type="input" class="form__field version" placeholder="" name="pageAddress"
+                                id='pageAddress' onclick="EnableButton('clientBtn')" required />
+                            <label id="pageLab" for="pageAddress" class="form__label version">Page URL</label>
+                        </div>
+
+                        <div class="nextButton" id="clientBtn">
+                            <button class="link link--arrowed" disabled>Next
+                                <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 32 32">
+                                    <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round"
+                                        stroke-miterlimit="10">
+                                        <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                        <path class="arrow-icon--arrow" d="M12 30 L24 16 12 2">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="nextButton" id="clientBackBtn" onclick="GoBack(1)">
+                    <button class="link link--arrowed">
+                        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                <path d="M20 30 L8 16 20 2"/>
+                            </g>
+                        </svg>
+                        <span style="padding-left: 5px;">Back</span>
+                    </button>
+                </div>
+            </div>
+            <!--localization screen-->
+            <div class="localizationScreen" id="localizationScreen">
+                <div class="sliderLang">
+                    <span id="textSliderLeftLang" class="sliderTextLang textSliderLeftLang activeTextLeftLang">
+                        PREDEFINED
+                    </span>
+                    <input type="checkbox" id="switchLang" class="switchLang" onchange="switchClientCheckboxLanguage()" /><label
+                        for="switchLang">Toggle</label>
+                    <span id="textSliderRightLang" class="sliderTextLang textSliderRightLang">
+                        CUSTOM
+                    </span>
+                </div>
+                <div class="predefined show" id="predefinedLang">
+                    <div class="grid">
+                        <!--localizations-->
+                        <div class="grid__item" onclick="languageClicked({
+                            name: 'Taiwan (Chinese)',
+                            currency: 'Taiwan Dolar (TWD)',
+                            currencyFormat: '1,234,567.89',
+                            dateFormat: 'MM/DD/YYYY'
+                        })">
+                            <img class="card__img flag" src="./Images/Languages/taiwan-flag-icon-256.png" alt="twn">
+                            <span class="card__span">TAIWAN</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom hide" id="customLang">
+                    <form onsubmit="UserDataSubmitStepThree(event)"> <!--ADD STEP THREE-->
+                        <div class="form__group localizationName">
+                            <input type="input" class="form__field" placeholder="" name="localizationName" id='localizationName'
+                                onclick="EnableButton('langBtn')" required />
+                            <label id="lLab" for="localizationName" class="form__label langformLabel">Localization Name</label>
+                        </div>
+                        <div class="form__group currency">
+                            <input type="input" class="form__field currency" placeholder="" name="currencyName"
+                                id='currencyName' onclick="EnableButton('langBtn')" required />
+                            <label id="cnLab" for="currencyName" class="form__label langformLabel">Currency Name</label>
+                        </div>
+                        <div class="form__group curFormat">
+                            <input type="input" class="form__field curFormat" placeholder="" name="currencyFormat" id='currencyFormat'
+                                onclick="EnableButton('langBtn')" required />
+                            <label id="cfLab" for="currencyFormat" class="form__label langformLabel">Currency Format</label>
+                        </div>
+                        <div class="form__group dateFormat">
+                            <input type="input" class="form__field dateFormat" placeholder="" name="dateFormat"
+                                id='dateFormat' onclick="EnableButton('langBtn')" required />
+                            <label id="dateformLab" for="dateFormat" class="form__label langformLabel">Date Format</label>
+                        </div>
+
+                        <div class="nextButton" id="langBtn">
+                            <button class="link link--arrowed" disabled>Next
+                                <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 32 32">
+                                    <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round"
+                                        stroke-miterlimit="10">
+                                        <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                        <path class="arrow-icon--arrow" d="M12 30 L24 16 12 2">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="nextButton" id="clientBackBtn" onclick="GoBack(2)">
+                    <button class="link link--arrowed">
+                        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                <path d="M20 30 L8 16 20 2"/>
+                            </g>
+                        </svg>
+                        <span style="padding-left: 5px;">Back</span>
+                    </button>
+                </div>
+            </div>
+            <!--Employee Data Screen-->
+            <div class="loginDataScreen" id="loginDataScreen">
+                <div class="instructions redText">
+                    <span>Please create Member Site Account to Login</span><hr>
+                    <span>Make sure that user:</span>
+                    <ul>
+                        <li>Is eligible for all benefits</li>
+                        <li>Doesn't have pending events</li>
+                        <li>Hasn't changed language</li>
+                    </ul>
+                </div>
+                <div class="emplData">
+                    <form onsubmit="UserDataSubmitStepFour(event)"> <!--ADD STEP FOUR-->
+                        <div class="form__group employeeLogin">
+                            <input type="input" class="form__field" placeholder="" name="employeeLogin" id='employeeLogin'
+                                onclick="EnableButton('userDataBtn')" required />
+                            <label id="emplogLab" for="employeeLogin" class="form__label empDataLabel">Login</label>
+                        </div>
+                        <div class="form__group employeePassword">
+                            <input type="password" class="form__field employeePassword" placeholder="" name="employeePassword"
+                                id='employeePassword' onclick="EnableButton('userDataBtn')" required />
+                            <label id="emPassLab" for="employeePassword" class="form__label empDataLabel">Password</label>
+                        </div>
+                        <div class="headlessCheckbox">
+                            <span class="cbxSpan">Run in headless Mode?</span>
+                            <input type="checkbox" id="cbx" style="display: none;">
+                            <label for="cbx" class="check">
+                                <svg width="18px" height="18px" viewBox="0 0 18 18">
+                                    <path
+                                        d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z">
+                                    </path>
+                                    <polyline points="1 9 7 14 15 4"></polyline>
+                                </svg>
+                            </label>
+                        </div>
+                        
+                        <div class="nextButton" id="userDataBtn">
+                            <button class="link link--arrowed" disabled>Next
+                                <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                    viewBox="0 0 32 32">
+                                    <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round"
+                                        stroke-miterlimit="10">
+                                        <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                        <path class="arrow-icon--arrow" d="M12 30 L24 16 12 2">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                </div>
+                <div class="nextButton" id="userDataBackBtn" onclick="GoBack(3)">
+                    <button class="link link--arrowed">
+                        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <g id="svgPath" fill="none" stroke="#f10000" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                                <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                                <path d="M20 30 L8 16 20 2"/>
+                            </g>
+                        </svg>
+                        <span style="padding-left: 5px;">Back</span>
+                    </button>
+                </div>
+            </div>
+            <!--Loading Screen-->
+            <div class="loadingScreen" id="loadingScreen">
+                <div class="lds-dual-ring"></div>
+                <span class="redText">Generating Script, application will close automatically... </span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

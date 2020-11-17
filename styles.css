@@ -1,0 +1,180 @@
+@import "./Styles/titleBar.css";
+@import "./Styles/inputField.css";
+@import "./Styles/button.css";
+@import "./Styles/slider.css";
+@import "./Styles/sliderLang.css";
+@import "./Styles/card.css";
+@import "./Styles/checkbox.css";
+@import "./Styles/spinner.css";
+
+body {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+.main {
+    width: 500px;
+    height: 500px;
+    border-radius: 5px;
+    /*border: 5px solid #a00000;*/
+    background-color: #F5F5F5;
+}
+.container {
+    height: 92%;
+    width: 500%;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    display: flex;
+    flex-flow: row;
+}
+.inputScreen {
+    height: 100%;
+    width: 500px;
+}
+.clientScreen {
+    height: 100%;
+    width: 500px;
+}
+.loginDataScreen {
+    height: 100%;
+    width: 500px;
+}
+.loadingScreen {
+    height: 100%;
+    width: 500px;
+}
+/* Step 1*/
+.moveLeftOneStep {
+    animation: moveLeftOneStep 0.5s ease-out forwards;
+}
+.moveRightOneStep {
+    animation: moveRightOneStep 0.5s ease-out forwards;
+}
+
+/* screen animations */
+@keyframes moveLeftOneStep {
+    from {
+        left: 0;
+    } to {
+        left: -500px;
+    }
+}
+@keyframes moveRightOneStep {
+    from {
+        left: -500px;
+    } to {
+        left: 0;
+    }
+}
+/* Step 2*/
+.moveLeftTwoStep {
+    animation: moveLeftTwoStep 0.5s ease-out forwards;
+}
+.moveRightTwoStep {
+    animation: moveRightTwoStep 0.5s ease-out forwards;
+}
+
+/* screen animations */
+@keyframes moveLeftTwoStep {
+    from {
+        left: -500px;
+    } to {
+        left: -1000px;
+    }
+}
+@keyframes moveRightTwoStep {
+    from {
+        left: -1000px;
+    } to {
+        left: -500px;
+    }
+}
+/* Step 3*/
+.moveLeftThreeStep {
+    animation: moveLeftThreeStep 0.5s ease-out forwards;
+}
+.moveRightThreeStep {
+    animation: moveRightThreeStep 0.5s ease-out forwards;
+}
+
+/* screen animations */
+@keyframes moveLeftThreeStep {
+    from {
+        left: -1000px;
+    } to {
+        left: -1500px;
+    }
+}
+@keyframes moveRightThreeStep {
+    from {
+        left: -1500px;
+    } to {
+        left: -1000px;
+    }
+}
+/* Step 4*/
+.moveLeftFourStep {
+    animation: moveLeftFourStep 0.5s ease-out forwards;
+}
+.moveRightFourStep {
+    animation: moveRightFourStep 0.5s ease-out forwards;
+}
+
+/* screen animations */
+@keyframes moveLeftFourStep {
+    from {
+        left: -1500px;
+    } to {
+        left: -2000px;
+    }
+}
+@keyframes moveRightFourStep {
+    from {
+        left: -2000px;
+    } to {
+        left: -1500px;
+    }
+}
+
+.redText {
+    color: #f10000;
+    font-weight: 900;
+}
+
+.instructions {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.form__group.employeeLogin {
+    padding: 5% 25% 5%;
+}
+.form__group.employeePassword {
+    padding: 5% 25% 5%;
+}
+
+.cbxSpan {
+    font-size: 18px;
+}
+.headlessCheckbox {
+    transform: translateY(-210px);
+    padding-inline-start: 270px;
+}
+
+#userDataBackBtn {
+    bottom: 40px;
+    left: 30px;
+    width: 80%;
+}
+#userDataBtn {
+    bottom: 10px;
+    left: 430px;
+}
+
+
+

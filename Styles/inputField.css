@@ -1,0 +1,105 @@
+.form__group {
+    position: relative;
+    width: 50%;
+    height: 25%;
+    padding: 20% 10% 10% 25%;
+}
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #000;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+.form__field::placeholder {
+    color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 110px;
+}
+.form__label {
+    position: absolute;
+    top: 85px;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+}
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right,  #f10000,#a00000);
+    border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+    position: absolute;
+    top: 85px;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #f10000;
+    font-weight: 700;
+}
+/* reset input */
+.form__field:required, .form__field:invalid {
+    box-shadow: none;
+}
+/* version field */
+.form__group.version {
+    position: relative;
+    padding-top: 0;
+    padding-left: 25%;
+    width: 50%;
+}
+.form__field.version:placeholder-shown ~ .form__label {
+    top: 10px;
+}
+.form__label.version {
+    position: absolute;
+    top: -15px;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+}
+.form__field.version:focus ~ .form__label {
+    position: absolute;
+    top: -15px;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #f10000;
+    font-weight: 700;
+}
+.form__group.localizationName, 
+.form__group.currency,
+.form__group.curFormat,
+.form__group.dateFormat {
+    padding: 5% 0 0 20%;
+}
+.langformLabel {
+    top: 15px;
+}
+.form__field:focus ~ .langformLabel {
+    top: 5px;
+}
+
+#employeePassword {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+    border-color: #9b9b9b;
+    border-width: 2px;
+    padding-left: 0;
+}
+
+

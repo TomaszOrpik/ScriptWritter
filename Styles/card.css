@@ -1,0 +1,54 @@
+.grid {
+    display: grid;
+    width: 114px;
+    grid-gap: 6px;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    align-items: start;
+}
+@media (max-width: 60em) {
+    .grid {
+        grid-gap: 3px;
+   }
+}
+.grid__item {
+    position: relative;
+    background-color: #fff;
+    margin: 15px;
+    width: 80px;
+    height: 110px;
+    border-radius: 0.4px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.grid__item:hover {
+    /* transform: translateY(-0.5%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2); */
+}
+.grid__item:active {
+    transform: translateY(-2%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+}
+.cardButton {
+    width: 100%;
+    height: 100%;
+}
+.card__img {
+    padding: 5%;
+    width: 90%;
+}
+.flag {
+    padding: 20% 5% 20% 5%;
+    width: 90%;
+    height: 40%;
+}
+.card__span {
+    position: absolute;
+    z-index: 1200;
+    bottom: 1px;
+    right: 2px;
+    font-size: 120%;
+    font-weight: 900;
+    color: #f10000;
+}

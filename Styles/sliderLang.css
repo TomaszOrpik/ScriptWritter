@@ -1,0 +1,108 @@
+.sliderLang input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+.sliderLang > label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 30px;
+    background: transparent;
+    display: block;
+    border-radius: 20px;
+    position: relative;
+    border: 2px solid  #a00000;
+}
+.sliderLang > label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 18px;
+    height: 18px;
+    background: #a00000;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.sliderLang > input:checked + label:after {
+    left: 90%;
+    transform: translateX(-100%);
+}
+.sliderLang > label:active:after {
+    width: 26px;
+}
+label[for="switchLang"] {
+    margin-top: 5px;
+}
+
+.sliderLang {
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.sliderTextLang {
+    font-size: 36px;
+    font-weight: 900;
+    color: #9b9b9b;
+}
+.textSliderRightLang {
+    justify-content: flex-end;
+    padding-left: 20px;
+}
+.textSliderLeftLang {
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.activeTextLeftLang {
+    background: -webkit-linear-gradient(left,  #f10000 ,#a00000);
+    background: -o-linear-gradient(right,  #f10000 ,#a00000);
+    background: -moz-linear-gradient(right,  #f10000 ,#a00000);
+    background: linear-gradient(to right,  #f10000 ,#a00000); 
+    background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+.activeTextRightLang {
+    background: -webkit-linear-gradient(left,  #a00000 ,#f10000);
+    background: -o-linear-gradient(right,  #a00000 ,#f10000);
+    background: -moz-linear-gradient(right,  #a00000 ,#f10000);
+    background: linear-gradient(to right,  #a00000 ,#f10000); 
+    background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+.hide {
+    z-index: 1;
+    animation: hide ease-in 1s forwards;
+    /* display: none; */
+}
+.show {
+    z-index: 2;
+    animation: show ease-out 1s forwards;
+    /* display: block; */
+}
+
+
+
+@keyframes hide {
+    from {
+        opacity: 1;
+        height: 70%;
+    } to {
+        opacity: 0;
+        height: 0;
+    }
+}
+@keyframes show {
+    from {
+        opacity: 0;
+        height: 0;
+    } to {
+        opacity: 1;
+        height: 70%;
+    }
+}
+

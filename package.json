@@ -1,0 +1,31 @@
+{
+  "name": "scriptwriter",
+  "productName": "Script Writer",
+  "version": "1.0.0",
+  "description": "TO ADD",
+  "main": "index.cjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "node builder.js"
+  },
+  "author": "Tomasz Orpik",
+  "license": "ISC",
+  "dependencies": {
+    "asar": "^3.0.3",
+    "cpx": "^1.5.0",
+    "dateformat": "^3.0.3",
+    "docx": "^5.4.0",
+    "electron-builder": "^22.9.1",
+    "excel4node": "^1.7.2",
+    "express": "^4.17.1",
+    "file-saver": "^2.0.2",
+    "puppeteer": "^2.1.1"
+  },
+  "devDependencies": {
+    "electron": "^9.1.2",
+    "electron-installer-windows": "^3.0.0",
+    "electron-packager": "^15.0.0",
+    "electron-winstaller": "^4.0.1",
+    "puppeteer": "^2.1.1"
+  }
+}

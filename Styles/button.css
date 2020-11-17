@@ -1,0 +1,81 @@
+.link {
+    color: #9b9b9b;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.link--arrowed {
+    display: inline-block;
+    height: 2rem;
+    line-height: 2rem;
+}
+.link--arrowed .arrow-icon {
+    position: relative;
+    top: -1px;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+    vertical-align: middle;
+}
+.link--arrowed .arrow-icon--circle {
+    transition: stroke-dashoffset 0.3s ease;
+    stroke-dasharray: 95;
+    stroke-dashoffset: 95;
+}
+.link--arrowed:hover {
+    background: -webkit-linear-gradient(left,  #f10000 ,#a00000);
+    background: -o-linear-gradient(right,  #f10000 ,#a00000);
+    background: -moz-linear-gradient(right,  #f10000 ,#a00000);
+    background: linear-gradient(to right,  #f10000 ,#a00000); 
+    background-clip: text;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   stroke: white;
+}
+.link--arrowed:hover .arrow-icon {
+    transform: translate3d(5px, 0, 0);
+}
+.link--arrowed:hover .arrow-icon--circle {
+    stroke-dashoffset: 0;
+}
+.link--arrowed:hover #svgPath {
+    stroke: white;
+    animation: fillInside 1s ease-in forwards;
+}
+.link--arrowed:active {
+    padding-top: 5px;
+}
+.link--arrowed:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.nextButton {
+    position: relative;
+    bottom: -120px;
+    left: 400px;
+}
+#clientBtn {
+    bottom: -65px;
+    right: 0;
+}
+#clientBackBtn {
+    bottom: -30px;
+    left: 0;
+    width: 100px;
+}
+#langBtn {
+    bottom: -100px;
+}
+
+@keyframes fillInside {
+    from {
+        fill: #F5F5F5;
+    }
+    to {
+        fill: red;
+    }
+} 
