@@ -7,7 +7,7 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
     let completedText = null;
     let selectorExist = true;
     try { await page.waitForSelector("span[ng-bind-html='loadingText']"); }
-    catch (e) { selectorExist = messageBox(e, false); }
+    catch (e) { selectorExist = messageBox.messageBox(e, false); }
     if (selectorExist)
         loadingText = await page.evaluate(() => document.querySelector("span[ng-bind-html='loadingText']").innerText);
     /// wait for inputs to load
@@ -17,7 +17,7 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
         await page.waitForSelector('#Attachment');
         await page.waitForSelector('#claimItemBreakdownDetail');
         await page.waitForSelector('#AdditionalDetail');
-    } catch (e) { selectorExist = messageBox(e, false); }
+    } catch (e) { selectorExist = messageBox.messageBox(e, false); }
     if (selectorExist)
         /// get page text without inputs
         pageText = await page.evaluate(() => {
@@ -42,7 +42,7 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
     await page.goForward();
     try {
         await page.waitForSelector('.loading-error.ng-binding');
-        selectorExist = messageBox(e, false);
+        selectorExist = messageBox.messageBox(e, false);
     }
     catch (e) {
         selectorExist = true;
@@ -72,7 +72,7 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
     }
     try {
         await page.waitForSelector('h1[tbs-translate="FSA.ClaimSubmit.ClaimSubmitted"]');
-    } catch (e) { selectorExist = messageBox(e, false); }
+    } catch (e) { selectorExist = messageBox.messageBox(e, false); }
     if (selectorExist) {
         /// get page text
         const textUnformatted = await page.evaluate(() => {
