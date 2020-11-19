@@ -1,7 +1,7 @@
 module.exports.getMessage = async function getMessage(page, title) {
     let texts = [];
 
-    await page.click(`a[title="${title}"]`);
+    await page.click(`a[title="${title}"]`); //second lang throws error here
     await page.waitForSelector('#main');
     await page.waitForSelector('#content');
     /// wait for page to fully load
