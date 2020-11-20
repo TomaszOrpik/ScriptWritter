@@ -15,6 +15,10 @@ Node js + puppeteer app to scrap data from websites
 11. Testing on multiple clients + languages combinantions
 12. Documentation
 13. (if still be time) add save screenshots to file
+14. Color selection
+
+### NOTES:
+1. Check if I should add timeout to waitForSelectors since default await time is too big
 
 ### NOTICED ISSUE:
 * Missing enrollment and login page data
