@@ -1,55 +1,65 @@
+const messageBox = require('./Utilities/messageBox');
+
 module.exports.getProfile = async function getProfile(page, title) {
     let list = [];
     let tabs = [];
     let forCount = 0;
+    let SelectorExist = true;
 
     /// click into profile tab
-    await page.click(`#user-div > [title="${title}"]`);
-    await page.waitForSelector('#headerTabs');
-    await page.waitFor(5000);
-    tabs = await page.evaluate(() => {
-        const rawList = document.getElementById('headerTabs')
-            .children[0].children[0].children[0];
-        list = Array.from(rawList.children);
+    try { await page.waitForSelector(`#user-div > [title="${title}"]`); }
+    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
 
-        return list.map(el => el.querySelector('a').textContent);
-    });
+    if (SelectorExist) await page.click(`#user-div > [title="${title}"]`);
     
-    await getTabData(page, list, tabs, forCount);
-    forCount = forCount + 1;
-    if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
+    try { await page.waitForSelector('#headerTabs'); }
+    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    if (SelectorExist) {
+        tabs = await page.evaluate(() => {
+            const rawList = document.getElementById('headerTabs')
+                .children[0].children[0].children[0];
+            list = Array.from(rawList.children);
+    
+            return list.map(el => el.querySelector('a').textContent);
+        });
+        
+        await getTabData(page, list, tabs, forCount);
         forCount = forCount + 1;
-    }
-    if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
-    }
         if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
-    }
-    if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
-    }
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
         if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
-    }
-    if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
-    }
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
+            if (forCount < tabs.length) {
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
         if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
+            if (forCount < tabs.length) {
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
+        if (forCount < tabs.length) {
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
+            if (forCount < tabs.length) {
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
+        if (forCount < tabs.length) {
+            await getTabContent(page, list, tabs, forCount);
+            forCount = forCount + 1;
+        }
+        await page.goBack();
     }
-    if (forCount < tabs.length) {
-        await getTabContent(page, list, tabs, forCount);
-        forCount = forCount + 1;
-    }
-    await page.goBack();
+
     return list;
 }
 

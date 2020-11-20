@@ -6,6 +6,8 @@ const getLoginPage = require('./DataScrapping/GetLoginPage');
 const generateLocalManuscript = require('./GenerateLocalManuscript/CreateDocument');
 const generateGlobalManuscript = require('./GenerateGlobalManuscript/CreateExcel');
 
+const messageBox = require('./DataScrapping/Utilities/messageBox');
+
 //pageInteractionElements
 let reviewedBy;
 let version;
@@ -69,17 +71,18 @@ let langA;
 let langB;
 
 function Start() {
-        /// config puppeteer
-         (async () => {
-            let url = pageUrl + '/';
-            let browser = await puppeteer.launch({
-                headless: isHeadless,
-                defaultViewport: null,
-                args: [
-                    '--window-size=1920,1080',
-                    '--no-sandbox'
-                ]
-            });
+    let SelectorExist = true;
+    /// config puppeteer
+    (async () => {
+        let url = pageUrl + '/';
+        let browser = await puppeteer.launch({
+            headless: isHeadless,
+            defaultViewport: null,
+            args: [
+                '--window-size=1920,1080',
+                '--no-sandbox'
+            ]
+        });
         const page = await browser.newPage();
         page.setDefaultNavigationTimeout(0);
         /// open the page
@@ -90,17 +93,29 @@ function Start() {
         /// get forget password page data
         ///CODE HERE
         /// login to portal
+        try { 
+            await page.waitForSelector('input#username');
+            await page.waitForSelector('input#password');
+            await page.waitForSelector('div#login');
+        }
+        catch(e) { 
+            SelectorExist = messageBox.messageBox('Couldnt load login page inputs!', false); 
+            this.Close();
+        }
         await page.click('input#username');
         await page.keyboard.type(userId); // input login
         await page.click('input#password');
         await page.keyboard.type(password); // input password
         await page.click('div#login');
         try { await page.waitForNavigation(); }
-        catch(e) { 'Page didnt load correctly'};
+        catch(e) { SelectorExist = messageBox.messageBox('Page didnt load correctly', false); }
         /// get languages
-        const langNumber = await page.evaluate(() => {
+        const secondLangExist = true;
+        try { await page.waitForSelector('#ddlLanguage', { timeout: 1000 }); }
+        catch(e) { secondLangExist = false; }
+        const langNumber = secondLangExist ? await page.evaluate(() => {
             return document.getElementById('ddlLanguage').childElementCount;
-        });
+        }) : 1;
         /// choose english language
         if(langNumber > 1) {
             langA = await page.evaluate(() => {
@@ -111,7 +126,7 @@ function Start() {
             });
 
             try { await page.select('select[id="ddlLanguage"]', langA); }
-            catch(e) { 'Page didnt load correctly'};
+            catch(e) { SelectorExist = messageBox.messageBox('Page didnt load correctly', false); }
         };
         /// get English page data
         await getPageContent.getPageContent(page, pageContent);
@@ -119,27 +134,30 @@ function Start() {
         console.log(pageContent);
 
         ///second language --TO UNLOCK WHEN EXCEL GEN WORKS
-        // if(langNumber > 1) {
-        //     await page.select('select[id="ddlLanguage"]', langB);
-        //     await page.waitFor(2000);
-        //     await getPageContent.getPageContent(page, pageContentSecond);
-        //     ///logout
-        //     await page.click('i.fa.fa-sign-out');
-        //     /// get login page data
-        //     //CODE HERE
-        //     /// get forget password page data
-        //     ///CODE HERE
-        //     ///test console log
-        //     console.log(pageContentSecond);
-        // }
+        if(langNumber > 1) {
+            try { await page.waitForSelector('select[id="ddlLanguage"]', { timeout: 1000 }); }
+            catch(e) { SelectorExist = messageBox.messageBox('Couldnt Load second language!', false); }
+            if (SelectorExist) {
+                await page.select('select[id="ddlLanguage"]', langB);
+                await getPageContent.getPageContent(page, pageContentSecond);
+                ///logout
+                await page.click('i.fa.fa-sign-out');
+                /// get login page data
+                //CODE HERE
+                /// get forget password page data
+                ///CODE HERE
+                ///test console log
+                console.log(pageContentSecond);
+            }
+        }
         /// close browser
         await browser.close();
         /// save data to files
-        // generateLocalManuscript.createDocument(clientName, localizationName, version, revivedBy,
+        // generateLocalManuscript.createDocument(clientName, localizationName, version, reviewedBy,
         //     currencyName, curFormatName, dateName, declarLimitName, inlegibleName,
         //    pageContent, pageContentSecond
         //     );
-        generateGlobalManuscript.createExcel(clientName, localizationName, version, revivedBy,
+        generateGlobalManuscript.createExcel(clientName, localizationName, version, reviewedBy,
             currencyName, curFormatName, dateName, declarLimitName, inlegibleName,
            pageContent, pageContentSecond
         );
@@ -149,7 +167,7 @@ function Start() {
 
 function Close() {window.close();}
 
-function GoBack(step) { //class list replace only seconds
+function GoBack(step) {
     const container = document.getElementById('container');
     switch(step) {
         case 1:

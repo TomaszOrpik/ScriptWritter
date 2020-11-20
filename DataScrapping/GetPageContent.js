@@ -28,7 +28,7 @@ module.exports.getPageContent = async function getPageContent(page, pageContent)
             /// get profile Page
             pageContent.profilePage = await getProfile.getProfile(page, pageContent.userMenu[0]);
             /// get message Page
-            pageContent.messagePage = await getMessage.getMessage(page, pageContent.userMenu[1]); ///second lang throws error
+            pageContent.messagePage = await getMessage.getMessage(page, pageContent.userMenu[1]);
             // get list of navigation buttons
             let navigation = await page.evaluate(() => {
                 const nav = document.getElementById('menu-no-dashboard');

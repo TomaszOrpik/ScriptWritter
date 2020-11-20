@@ -162,7 +162,7 @@ body {
     font-size: 18px;
 }
 .headlessCheckbox {
-    transform: translateY(-210px);
+    transform: translateY(-180px);
     padding-inline-start: 270px;
 }
 

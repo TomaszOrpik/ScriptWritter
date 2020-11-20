@@ -37,10 +37,10 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
             const textFilOne = textArr.filter(el => el != "");
             return textFilOne.filter(el => el != " ");
         });
-    /// refresh page
-    await page.goBack();
-    await page.goForward();
-    try {
+    // /// refresh page
+    // await page.goBack();
+    // await page.goForward();
+    try { ///nie działa, powinno pomijać przy errorze a idzie dalej
         await page.waitForSelector('.loading-error.ng-binding');
         selectorExist = messageBox.messageBox(e, false);
     }
@@ -57,7 +57,7 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
             await page.waitForSelector('#AdditionalDetail');
         } catch (e) { selectorExist = messageBox(e, false); }
         /// fill submit a claim fields
-        await page.click("input[ng-model='vm.CurrentClaim.ReceiptDate']");
+        await page.click("input[ng-model='vm.CurrentClaim.ReceiptDate']"); ///tutaj wywala, przebudować await by sprawdził, czy wszystkie inputy są
         await page.keyboard.type('01/01/2020');
         await page.click("input[name='receiptNumberInput']");
         await page.keyboard.type('123');
@@ -72,7 +72,7 @@ module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
     }
     try {
         await page.waitForSelector('h1[tbs-translate="FSA.ClaimSubmit.ClaimSubmitted"]');
-    } catch (e) { selectorExist = messageBox.messageBox(e, false); }
+    } catch (e) { selectorExist = messageBox(e, false); }
     if (selectorExist) {
         /// get page text
         const textUnformatted = await page.evaluate(() => {

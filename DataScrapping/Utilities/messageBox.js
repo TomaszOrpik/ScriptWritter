@@ -3,7 +3,7 @@ const electron = require('electron');
 module.exports.messageBox = function messageBox(error, failResponse) {
     console.log(error);
     const notification = {
-        title: 'Application could not access selector',
+        title: `Page data error: ${error}`,
         body: error
     }
 
