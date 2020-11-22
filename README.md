@@ -24,8 +24,8 @@ Node js + puppeteer app to scrap data from websites
 
 ### NOTICED ISSUE:
 * Missing enrollment and login page data
-~~* scrapping doesn't work on second language~~
-~~* site survey adds 3 times (3 same buttons on page)~~
+* ~~scrapping doesn't work on second language~~
+* ~~site survey adds 3 times (3 same buttons on page)~~
 * benefit overview  saving to word
 * additional info doesn't save to excel
 * Enrollment issue
