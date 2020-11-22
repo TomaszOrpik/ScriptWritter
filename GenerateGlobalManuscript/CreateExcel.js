@@ -12,7 +12,7 @@ const saveProfilePageToExcel = require('./SaveProfilePageToExcel');
 const addStyles = require('./Utilities/AddStyles');
 
 module.exports.createExcel = function CreateExcel(
-    clientName, localizationName, version, revivedBy, currencyName, curFormatName, dateName, declarLimitName, inlegibleName,
+    clientName, localizationName, version, revivedBy, currencyName, curFormatName, dateName,
     pageContent, pageContentSecond
 ) {
     const desktopPath = (electron.app || electron.remote.app).getPath('desktop'); //to remove?

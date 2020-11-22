@@ -64,7 +64,7 @@
                 </div>
                 <div class="predefined show" id="predefined">
                     <div class="grid">
-                        <div class="grid__item" onclick="clientClicked({name: 'Johnson & Johnson', url: `https:\/\/jnj2-imp.tbs.aon.com`})">
+                        <div class="grid__item" onclick="clientClicked({name: 'Johnson & Johnson', url: `https:\/\/jnj2-imp.tbs.aon.com`, color: ' #f10000'})">
                             <img class="card__img" src="./Images/Clients/FYBLogo2.png" alt="jnj">
                             <span class="card__span">IMP</span>
                         </div>
@@ -72,7 +72,11 @@
                 </div>
                 <div class="custom hide" id="custom">
                     <form onsubmit="UserDataSubmitStepTwo(event)">
-                        <div class="form__group">
+                        <div class="form__group colorGroup">
+                            <label id="colLab" for="colorPicker" class="form__label">Heading Color</label>
+                            <input type="color" name="color" id="colorPicker" value="#f10000">
+                        </div>
+                        <div class="form__group urlGroup">
                             <input type="input" class="form__field" placeholder="" name="clientName" id='clientName'
                                 onclick="EnableButton('clientBtn')" required />
                             <label id="clLab" for="clientName" class="form__label">Client Name</label>
@@ -192,6 +196,7 @@
                     <span>Please create Member Site Account to Login</span><hr>
                     <span>Make sure that user:</span>
                     <ul>
+                        <li>If have claims - at least one is added</li>
                         <li>Is eligible for all benefits</li>
                         <li>Doesn't have pending events</li>
                         <li>Hasn't changed language</li>
@@ -252,6 +257,7 @@
             <div class="loadingScreen" id="loadingScreen">
                 <div class="lds-dual-ring"></div>
                 <span class="redText">Generating Script, application will close automatically... </span>
+                <button onclick="Reset()" class="btnNormal">RESET</button>
             </div>
         </div>
     </div>

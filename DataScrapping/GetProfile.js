@@ -7,13 +7,15 @@ module.exports.getProfile = async function getProfile(page, title) {
     let SelectorExist = true;
 
     /// click into profile tab
-    try { await page.waitForSelector(`#user-div > [title="${title}"]`); }
-    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    await page.evaluate(title => {
+        const tab = document.querySelector(`a[title="${title}"]`);
+        tab.click();
+    }, title);
 
-    if (SelectorExist) await page.click(`#user-div > [title="${title}"]`);
-    
     try { await page.waitForSelector('#headerTabs'); }
-    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    catch(e) { 
+        SelectorExist = messageBox.messageBox(e, false); 
+    }
     if (SelectorExist) {
         tabs = await page.evaluate(() => {
             const rawList = document.getElementById('headerTabs')

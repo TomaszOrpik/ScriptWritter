@@ -23,4 +23,8 @@
       transform: rotate(360deg);
     }
   }
+
+  .lds-dual-ring {
+    padding-left: 10px;
+  }
   

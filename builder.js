@@ -1,7 +1,7 @@
 const electronInstaller = require('electron-winstaller');
 
-const src = 'C:\\Script Writer-win32-x64';
-const dest = 'C:\\Installer';
+const src = __dirname + '\\Script Writer-win32-x64';
+const dest = __dirname + '\\Installer';
 
 create()
 
@@ -14,8 +14,8 @@ try {
       exe: 'Script Writer.exe',
       description: 'to add'
     });
-    console.log('It worked!');
+    console.log(`Application created at: ${dest}`);
   } catch (e) {
-    console.log(`No dice: ${e.message}`);
+    console.log(`Error occured: ${e.message}`);
   }
 }

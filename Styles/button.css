@@ -79,3 +79,42 @@
         fill: red;
     }
 } 
+
+
+.btnNormal {
+    background-color: transparent;
+    border: 2px solid #f10000;
+    color: #f10000;
+    border-radius: 15px;
+    position: absolute;
+    right: 180px;
+    top: 350px;
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    animation: hoverBtnReverse 0.5s forwards ease-in-out;
+    outline: none;
+}
+.btnNormal:hover {
+    animation: hoverBtn 0.5s forwards ease-in-out;
+}
+
+@keyframes hoverBtn {
+    from {
+        background-color: transparent;
+        color: #f10000;
+    } to {
+        background-color: #f10000;
+        color: white;
+    }
+}
+
+@keyframes hoverBtnReverse {
+    from {
+        background-color: #f10000;
+        color: white;
+    } to {
+        background-color: transparent;
+        color: #f10000;
+    }
+}

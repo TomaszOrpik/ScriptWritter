@@ -14,6 +14,8 @@ const getBenefitStatement = require('./GetBenefitStatement');
 const getEnrollment = require('./GetEnrollment');
 
 const getDivText = require('./Utilities/GetDivText');
+const messageBox = require('./Utilities/messageBox');
+const Sleep = require('./Utilities/Sleep');
 
 module.exports.getPageContent = async function getPageContent(page, pageContent) {
     const pagesUnsorted = [];
@@ -25,6 +27,7 @@ module.exports.getPageContent = async function getPageContent(page, pageContent)
             pageContent.mainMenu = await getDivText.getDivText(page, 'menu-no-dashboard');
             /// get footer
             pageContent.footer = await getDivText.getDivText(page, 'f-nav');
+            console.log(pageContent.userMenu);
             /// get profile Page
             pageContent.profilePage = await getProfile.getProfile(page, pageContent.userMenu[0]);
             /// get message Page
@@ -116,6 +119,7 @@ async function buttonsLoop(page, navigation, pageContent, pagesUnsorted) {
 }
 
 async function checkPages(page, title, pageContent, pagesUnsorted) {
+    let SelectorExist = true;
     await page.waitForSelector('#main');
     await page.waitFor(10000);
     const mainClass = await page.evaluate(() => {
@@ -137,15 +141,28 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
         if (pageLink === "/FSA/FSAClaim") {
             /// click last link
             await clickLastLink(page);
-            /// get Claims Submit Page
-            pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
-            await page.goBack();
+            // get Claims Submit Page
+            try { await page.waitForSelector('.no-spending-account.row.ng-scope'); console.log('claim error'); }
+            catch(e) {
+                SelectorExist = messageBox.messageBox(e, false);
+            }
+            if (!SelectorExist)
+                pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
+            // await page.goBack();
+            SelectorExist = true;
         }
         await page.goBack();
         await page.goBack();
         break;
     case 'claim':
-        pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
+        try { await page.waitForSelector('.no-spending-account.row.ng-scope'); console.log('claim error'); }
+        catch(e) {
+            SelectorExist = messageBox.messageBox(e, false);
+        }
+        if (!SelectorExist)
+            pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
+        
+        SelectorExist = true;
         await page.goBack();
         await page.goBack();
         break;
@@ -174,7 +191,7 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
         else if (isFlexClaim) {
             pageContent.claimOverviewPage = await getClaimSummary.getClaimSummary(page);
             await page.click('button.btn.btn-primary.claim-details-edit');
-            pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
+            //pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
             await page.goBack();
             await page.goBack();
         }

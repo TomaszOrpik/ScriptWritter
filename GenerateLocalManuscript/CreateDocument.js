@@ -7,7 +7,7 @@ const FileSaver = require('file-saver');
 const Styles = require('./Utilities/DocumentStyles');
 
 module.exports.createDocument = function createDocument(
-    clientName, localizationName, version, revivedBy, currencyName, curFormatName, dateName, declarLimitName, inlegibleName,
+    clientName, localizationName, version, revivedBy, currencyName, curFormatName, dateName,
     pageContent, pageContentSecond
 ) {
     /// create new document

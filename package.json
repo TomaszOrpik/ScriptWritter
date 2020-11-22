@@ -6,7 +6,9 @@
   "main": "index.cjs",
   "scripts": {
     "start": "electron .",
-    "build": "node builder.js"
+    "package": "electron-packager .",
+    "builder": "node builder.js",
+    "build": "electron-packager . && npm run builder"
   },
   "author": "Tomasz Orpik",
   "license": "ISC",

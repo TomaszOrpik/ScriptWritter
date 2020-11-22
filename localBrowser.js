@@ -8,12 +8,15 @@ const generateGlobalManuscript = require('./GenerateGlobalManuscript/CreateExcel
 
 const messageBox = require('./DataScrapping/Utilities/messageBox');
 
+let _browser;
+
 //pageInteractionElements
 let reviewedBy;
 let version;
 
 let clientName;
 let pageUrl;
+let clientColor;
 
 let localizationName;
 let currencyName;
@@ -84,6 +87,7 @@ function Start() {
             ]
         });
         const page = await browser.newPage();
+        _browser = browser;
         page.setDefaultNavigationTimeout(0);
         /// open the page
         await page.goto(url);
@@ -141,9 +145,13 @@ function Start() {
                 await page.select('select[id="ddlLanguage"]', langB);
                 await getPageContent.getPageContent(page, pageContentSecond);
                 ///logout
-                await page.click('i.fa.fa-sign-out');
+                await page.evaluate(() => {
+                    const logout = document.querySelector('i.fa.fa-sign-out');
+                    logout.click();
+                })
                 /// get login page data
-                //CODE HERE
+                const loginSecond = await getLoginPage.getLoginPage(page, pageContent);
+                pageContentSecond.loginPage = loginSecond;
                 /// get forget password page data
                 ///CODE HERE
                 ///test console log
@@ -154,15 +162,20 @@ function Start() {
         await browser.close();
         /// save data to files
         // generateLocalManuscript.createDocument(clientName, localizationName, version, reviewedBy,
-        //     currencyName, curFormatName, dateName, declarLimitName, inlegibleName,
+        //     currencyName, curFormatName, dateName,
         //    pageContent, pageContentSecond
         //     );
         generateGlobalManuscript.createExcel(clientName, localizationName, version, reviewedBy,
-            currencyName, curFormatName, dateName, declarLimitName, inlegibleName,
+            currencyName, curFormatName, dateName,
            pageContent, pageContentSecond
-        );
+        ); ///add client color to formatting
     })
     ();
+}
+
+async function Reset() {
+    await _browser.close();
+    Start();
 }
 
 function Close() {window.close();}
@@ -217,9 +230,11 @@ function UserDataSubmitStepTwo(e) {
     e.preventDefault();
     const value1 = document.getElementById('clientName').value;
     const value2 = document.getElementById('pageAddress').value;
+    const value3 = document.getElementById('colorPicker').value;
 
     clientName = value1;
     pageUrl = value2;
+    clientColor = value3;
 
     const container = document.getElementById('container');
     if (container.classList.contains('moveRightTwoStep')) {
@@ -273,6 +288,7 @@ function UserDataSubmitStepFour(e) {
 function clientClicked(client) {
     clientName = client.name;
     pageUrl = client.url;
+    clientColor = client.color;
     /// switch page to next
     const container = document.getElementById('container');
     if (container.classList.contains('moveRightTwoStep')) {

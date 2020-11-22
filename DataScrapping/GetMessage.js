@@ -4,10 +4,15 @@ module.exports.getMessage = async function getMessage(page, title) {
     let texts = [];
     let SelectorExist = true;
 
-    try { await page.waitForSelector(`a[title="${title}"]`); }
-    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
-    if (SelectorExist)
-        await page.click(`a[title="${title}"]`);
+    await page.evaluate(() => {
+        document.getElementById('user-div').children[1].click();    
+    });
+
+    // try { await page.waitForSelector(`a[title="${title}"]`, {timeout: 5000}); }
+    // catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    
+    // await page.click(`a[title="${title}"]`);  /// no node found for selector my messages
+
     try {
         await page.waitForSelector('#main');
         await page.waitForSelector('#content');
@@ -18,7 +23,9 @@ module.exports.getMessage = async function getMessage(page, title) {
         await page.waitForSelector('tip-tip');
         await page.waitForSelector('.k-link');
     }
-    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    catch(e) { 
+        SelectorExist = messageBox.messageBox(e, false); 
+    }
     if (SelectorExist) {
         texts = await page.evaluate(() => {
             const localtextArr = [];
