@@ -81,47 +81,51 @@ module.exports.getHome = async  function getHome(page, navTitle) {
             });
             return sliderDetails;
         });
-    // valid data (if pending event and add claim remove other data)
+        // valid data (if pending event and add claim remove other data)
     try { await page.waitForSelector('#right-side'); }
     catch(e) { SelectorExist = messageBox.messageBox(e, false); }
-    if (SelectorExist)
+    if (SelectorExist) ///throws error here
         modules = await page.evaluate(() => {
-            const mods = document.getElementById('right-side').children[0];
+            const mods = document.getElementsByClassName('modules-right-side')[0]; //to check
             const claimItems = document.querySelectorAll("div[ng-bind='claim.ClaimItem']");
-            if(claimItems !== undefined)
+            if(claimItems.length > 0)
                 claimItems.forEach(claimItem => {
                     claimItem.parentNode.removeChild(claimItem);
                 });
             const claimNumbers = document.querySelectorAll("span[ng-bind='claim.ClaimNumber']");
-            if(claimNumbers !== undefined)
+            if(claimNumbers.length > 0)
                 claimNumbers.forEach(claimNumber => {
                     claimNumber.parentNode.removeChild(claimNumber);
                 });
             const claimAmounts = document.querySelectorAll(`span[ng-class="vm.showSensitiveData ? 'show-sensitive':'hide-sensitive'"]`);
-            if(claimAmounts !== undefined)
+            if(claimAmounts.length > 0)
                 claimAmounts.forEach(claimAmount => {
                     claimAmount.parentNode.removeChild(claimAmount);
                 });
             const claimStatuses = document.querySelectorAll("span[ng-bind='claim.LocalizedStatus']");
-            if(claimStatuses !== undefined)
+            if(claimStatuses.length > 0)
                 claimStatuses.forEach(claimStatus => {
                     claimStatus.parentNode.removeChild(claimStatus);
                 });
             //remove other modules data
-            const modsArr = Array.from(mods.children);
-
+            const modsArr = Array.from(mods.children); //Cannot read property 'children' of undefined
             let mappedMods = modsArr.map((el) => {
-                const mod = el.children[0].children[0];
 
                 const moduleTextBeforeFilter = [];
-                const moduleTitle = mod.querySelector('h3').textContent;
-                const spans = mod.querySelectorAll('span');
+                const moduleTitle = el.querySelector('h3').textContent;
+                const spans = el.querySelectorAll('span');
                 spans.forEach(span => moduleTextBeforeFilter.push(span.innerText));
                 const moduleTextFiltr = moduleTextBeforeFilter.filter(el => el != '');
                 const moduleText = [...new Set(moduleTextFiltr)];
 
                 return { moduleTitle, moduleText };
             });
+        //check if trs data exist and remove
+        const trs = document.getElementsByClassName('highcharts-title');
+        const trsTwo = document.getElementsByClassName('highcharts-data-label');
+        if (trs.length > 0) trs[0].removeChild(trs[0].children[0]);
+        if (trsTwo.length > 0) trsTwo[0].children[0].removeChild(trsTwo[0].children[0].children[1]);
+
         return mappedMods;
     });
     return { title, titles, sliderText, modules, text };

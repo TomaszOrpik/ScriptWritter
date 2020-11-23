@@ -29,7 +29,7 @@ let isHeadless;
 
 let pageContent = {
     loginPage: null, //+
-    forgotPassword: null,
+    forgotPassword: null, //add scrapping for every tab
     needAssistanceBar: null, //+
     userMenu: null, //+
     mainMenu: null, //+
@@ -43,9 +43,9 @@ let pageContent = {
     uploadDocumentPage: null, //+
     mobilePage: null, //+
     wellbeingPage: null, //general check if null before save not in jnj
-    enrollmentPage: null,
+    enrollmentPage: null, //add scrapping for every subpage
     benefitStatementPage: null, //+
-    trsPage: null, //not in jnj
+    trsPage: null, // to add
     generalPages: [] //+
 }
 let pageContentSecond = {
@@ -114,7 +114,7 @@ function Start() {
         try { await page.waitForNavigation(); }
         catch(e) { SelectorExist = messageBox.messageBox('Page didnt load correctly', false); }
         /// get languages
-        const secondLangExist = true;
+        let secondLangExist = true;
         try { await page.waitForSelector('#ddlLanguage', { timeout: 1000 }); }
         catch(e) { secondLangExist = false; }
         const langNumber = secondLangExist ? await page.evaluate(() => {

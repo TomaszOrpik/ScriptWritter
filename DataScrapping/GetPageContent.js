@@ -12,6 +12,7 @@ const getUploadDocument = require('./GetUploadDocument');
 const getMobile = require('./GetMobile');
 const getBenefitStatement = require('./GetBenefitStatement');
 const getEnrollment = require('./GetEnrollment');
+const getTrs = require('./GetTrs');
 
 const getDivText = require('./Utilities/GetDivText');
 const messageBox = require('./Utilities/messageBox');
@@ -27,7 +28,6 @@ module.exports.getPageContent = async function getPageContent(page, pageContent)
             pageContent.mainMenu = await getDivText.getDivText(page, 'menu-no-dashboard');
             /// get footer
             pageContent.footer = await getDivText.getDivText(page, 'f-nav');
-            console.log(pageContent.userMenu);
             /// get profile Page
             pageContent.profilePage = await getProfile.getProfile(page, pageContent.userMenu[0]);
             /// get message Page
@@ -135,6 +135,16 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
         await page.goBack();
         break;
     case 'general':
+        let isTrs = true;
+        try { await page.waitForSelector('#dashboardContainer') }
+        catch(e) {
+            isTrs = false;
+        }
+        if (isTrs) {
+            pageContent.trsPage = await getTrs.getTrs(page, title);
+            await page.goBack();
+            break;
+        }
         pagesUnsorted.push(await getGeneral.getGeneral(page, title));
         /// get last link
         const pageLink = await generalGetLastLink(page);
@@ -142,7 +152,7 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
             /// click last link
             await clickLastLink(page);
             // get Claims Submit Page
-            try { await page.waitForSelector('.no-spending-account.row.ng-scope'); console.log('claim error'); }
+            try { await page.waitForSelector('.no-spending-account.row.ng-scope'); }
             catch(e) {
                 SelectorExist = messageBox.messageBox(e, false);
             }
@@ -155,7 +165,7 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
         await page.goBack();
         break;
     case 'claim':
-        try { await page.waitForSelector('.no-spending-account.row.ng-scope'); console.log('claim error'); }
+        try { await page.waitForSelector('.no-spending-account.row.ng-scope'); }
         catch(e) {
             SelectorExist = messageBox.messageBox(e, false);
         }
@@ -171,7 +181,6 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
         await page.goBack();
         break;
     case 'matrix matrix-for-enroll':
-        console.log('reached');
         pageContent.enrollmentPage = await getEnrollment.getEnrollmentPage(page);
         await page.goBack();
         break;
