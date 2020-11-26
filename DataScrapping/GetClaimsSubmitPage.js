@@ -1,8 +1,13 @@
 const formatText = require('./Utilities/formatText');
+const messageBox = require('./Utilities/messageBox');
 
 module.exports.getClaimsSubmitPage = async function getClaimsSubmitPage(page) {
-    await page.waitForSelector("span[ng-bind-html='loadingText']");
-    const loadingText = await page.evaluate(() => document.querySelector("span[ng-bind-html='loadingText']").innerText);
+    const loadingText = null;
+    let SelectorExist = true;
+    try { await page.waitForSelector("span[ng-bind-html='loadingText']"); }
+    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    if (SelectorExist)
+        loadingText = await page.evaluate(() => document.querySelector("span[ng-bind-html='loadingText']").innerText);
     /// wait for inputs to load
     await page.waitForSelector('#claimDetail');
     await page.waitForSelector('#receiptDetail');

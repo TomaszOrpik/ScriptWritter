@@ -137,7 +137,7 @@ function Start() {
         //test console log
         console.log(pageContent);
 
-        ///second language --TO UNLOCK WHEN EXCEL GEN WORKS
+        ///second language
         if(langNumber > 1) {
             try { await page.waitForSelector('select[id="ddlLanguage"]', { timeout: 1000 }); }
             catch(e) { SelectorExist = messageBox.messageBox('Couldnt Load second language!', false); }
@@ -161,10 +161,7 @@ function Start() {
         /// close browser
         await browser.close();
         /// save data to files
-        // generateLocalManuscript.createDocument(clientName, localizationName, version, reviewedBy,
-        //     currencyName, curFormatName, dateName,
-        //    pageContent, pageContentSecond
-        //     );
+        generateLocalManuscript.createDocument(clientName, localizationName, version, pageContent, pageContentSecond, clientColor);
         generateGlobalManuscript.createExcel(clientName, localizationName, version, reviewedBy,
             currencyName, curFormatName, dateName,
            pageContent, pageContentSecond

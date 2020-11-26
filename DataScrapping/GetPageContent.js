@@ -64,7 +64,7 @@ module.exports.getPageContent = async function getPageContent(page, pageContent)
             /// loop through main menu buttons
             await buttonsLoop(page, navigation, pageContent, pagesUnsorted);
             /// loop through footer buttons
-            await buttonsLoop(page, footerNavigation, pageContent, pagesUnsorted);
+            await buttonsLoop(page, footerNavigation, pageContent, pagesUnsorted); //na second lang to wywala
 
             pageContent.generalPages = Array.from(new Set(pagesUnsorted.map(a => a.title)))
                  .map(title => {
@@ -91,7 +91,7 @@ async function getButtonsCount(page) {
     return await page.evaluate(() =>  document.getElementById('main').getElementsByClassName('btn').length)
 }
 
-async function buttonsLoop(page, navigation, pageContent, pagesUnsorted) {
+async function buttonsLoop(page, navigation, pageContent, pagesUnsorted) { ///Evaluation failed: TypeError: Cannot read property 'click' of undefined
     /// click at each button
         /// jnj double link class issue fix
         let surveClicked = false;
@@ -198,10 +198,14 @@ async function checkPages(page, title, pageContent, pagesUnsorted) {
             pageContent.uploadDocumentPage = await getUploadDocument.getUploadDocument(page, title);
         }
         else if (isFlexClaim) {
+            let gotSubmitBtn = true;
             pageContent.claimOverviewPage = await getClaimSummary.getClaimSummary(page);
-            await page.click('button.btn.btn-primary.claim-details-edit');
-            //pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
-            await page.goBack();
+            try { await page.click('button.btn.btn-primary.claim-details-edit'); }
+            catch(e) { gotSubmitBtn = messageBox.messageBox(e, false); }
+            if (gotSubmitBtn) {
+                pageContent.claimSubmitPage = await getClaimsSubmitPage.getClaimsSubmitPage(page);
+                await page.goBack();
+            }
             await page.goBack();
         }
         else if (!isUploadDocument && !isFlexClaim) {

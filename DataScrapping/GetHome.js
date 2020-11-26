@@ -82,50 +82,72 @@ module.exports.getHome = async  function getHome(page, navTitle) {
             return sliderDetails;
         });
         // valid data (if pending event and add claim remove other data)
-    try { await page.waitForSelector('#right-side'); }
+    try { 
+        await page.waitForSelector('#right-side'); 
+        await page.waitForSelector("div[ng-bind='claim.ClaimItem']", { timeout: 30000 });
+        await page.waitForSelector("span[ng-bind='claim.ClaimNumber']");
+        await page.waitForSelector(`span[ng-class="vm.showSensitiveData ? 'show-sensitive':'hide-sensitive'"]`);
+        await page.waitForSelector("span[ng-bind='claim.LocalizedStatus']");
+    }
     catch(e) { SelectorExist = messageBox.messageBox(e, false); }
     if (SelectorExist) ///throws error here
-        modules = await page.evaluate(() => {
-            const mods = document.getElementsByClassName('modules-right-side')[0]; //to check
+        await page.evaluate(() => {
+            //remove other modules data
             const claimItems = document.querySelectorAll("div[ng-bind='claim.ClaimItem']");
-            if(claimItems.length > 0)
+            if (claimItems.length > 0)
                 claimItems.forEach(claimItem => {
                     claimItem.parentNode.removeChild(claimItem);
                 });
             const claimNumbers = document.querySelectorAll("span[ng-bind='claim.ClaimNumber']");
-            if(claimNumbers.length > 0)
+            if (claimNumbers.length > 0)
                 claimNumbers.forEach(claimNumber => {
                     claimNumber.parentNode.removeChild(claimNumber);
                 });
             const claimAmounts = document.querySelectorAll(`span[ng-class="vm.showSensitiveData ? 'show-sensitive':'hide-sensitive'"]`);
-            if(claimAmounts.length > 0)
+            if (claimAmounts.length > 0)
                 claimAmounts.forEach(claimAmount => {
                     claimAmount.parentNode.removeChild(claimAmount);
                 });
             const claimStatuses = document.querySelectorAll("span[ng-bind='claim.LocalizedStatus']");
-            if(claimStatuses.length > 0)
+            if (claimStatuses.length > 0)
                 claimStatuses.forEach(claimStatus => {
                     claimStatus.parentNode.removeChild(claimStatus);
                 });
-            //remove other modules data
-            const modsArr = Array.from(mods.children); //Cannot read property 'children' of undefined
-            let mappedMods = modsArr.map((el) => {
 
-                const moduleTextBeforeFilter = [];
-                const moduleTitle = el.querySelector('h3').textContent;
-                const spans = el.querySelectorAll('span');
-                spans.forEach(span => moduleTextBeforeFilter.push(span.innerText));
-                const moduleTextFiltr = moduleTextBeforeFilter.filter(el => el != '');
-                const moduleText = [...new Set(moduleTextFiltr)];
+        });
+    
+    SelectorExist = true;
+    try { 
+        await page.waitForSelector('.highcharts-title');
+        await page.waitForSelector('.highcharts-data-label');
+    }
+    catch(e) { SelectorExist = messageBox.messageBox(e, false); }
+    if (SelectorExist) {
+        try {
+            await page.evaluate(() => {
+                //check if trs data exist and remove
+                const trs = document.getElementsByClassName('highcharts-title');
+                const trsTwo = document.getElementsByClassName('highcharts-data-label');
+                if (trs.length > 0) trs[0].removeChild(document.getElementsByClassName('highcharts-title')[0].children[0]);
+                if (trsTwo.length > 0) trsTwo[0].children[0].removeChild(document.getElementsByClassName('highcharts-data-label')[0].children[0].children[1]);
+            });   
+        } catch(e) {  console.log(e); }
+    }
+            
+    modules = await page.evaluate(() => {
+        const mods = document.getElementsByClassName('modules-right-side')[0];
+        const modsArr = Array.from(mods.children);
+        let mappedMods = modsArr.map((el) => {
 
-                return { moduleTitle, moduleText };
-            });
-        //check if trs data exist and remove
-        const trs = document.getElementsByClassName('highcharts-title');
-        const trsTwo = document.getElementsByClassName('highcharts-data-label');
-        if (trs.length > 0) trs[0].removeChild(trs[0].children[0]);
-        if (trsTwo.length > 0) trsTwo[0].children[0].removeChild(trsTwo[0].children[0].children[1]);
+            const moduleTextBeforeFilter = [];
+            const moduleTitle = el.querySelector('h3').textContent;
+            const spans = el.querySelectorAll('span');
+            spans.forEach(span => moduleTextBeforeFilter.push(span.innerText));
+            const moduleTextFiltr = moduleTextBeforeFilter.filter(el => el != '');
+            const moduleText = [...new Set(moduleTextFiltr)];
 
+            return { moduleTitle, moduleText };
+        });
         return mappedMods;
     });
     return { title, titles, sliderText, modules, text };

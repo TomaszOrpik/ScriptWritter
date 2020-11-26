@@ -5,7 +5,7 @@ module.exports.getTrs = async function getTrs(page, elTitle) {
     let text = null;
     
     await page.waitFor(30000);
-    await page.waitForSelector('div.page-content');
+    await page.waitForSelector('div#dashboardContainer');
     await page.waitForSelector(".col-xs-5");
     await page.waitForSelector('.summarystatementdate');
     const rawText = await page.evaluate(() => {
@@ -13,7 +13,9 @@ module.exports.getTrs = async function getTrs(page, elTitle) {
         currencys.forEach(el => el.parentElement.removeChild(el));
         const date = document.getElementsByClassName('summarystatementdate')[0];
         date.parentElement.removeChild(date);
-        return document.getElementsByName('page-content')[0].innerText;
+
+        const pageContet = document.getElementById('dashboardContainer');
+        return pageContet.innerText;
     });
     text = formatText.formatText(rawText);
     return { title, text };

@@ -6,6 +6,7 @@
 @import "./Styles/card.css";
 @import "./Styles/checkbox.css";
 @import "./Styles/spinner.css";
+@import "./Styles/SelectBox.css";
 
 body {
     width: 500px;

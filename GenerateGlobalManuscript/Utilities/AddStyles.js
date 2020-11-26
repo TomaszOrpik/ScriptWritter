@@ -1,4 +1,4 @@
-module.exports.addStyles = function addStyles(wb) {
+module.exports.addStyles = function addStyles(wb, mainColor) {
     return [
         wb.createStyle({
             font: {
@@ -51,13 +51,7 @@ module.exports.addStyles = function addStyles(wb) {
             numberFormat: '$#,##0.00; ($#,##0.00); -',
             fill: {
                 type: "pattern",
-                bgColor: "#808080"
-            }
-        }),
-        wb.createStyle({
-            font: {
-                color: '#C0392B',
-                size: 18
+                bgColor: '#FF0000' //main color
             }
         })
     ]
