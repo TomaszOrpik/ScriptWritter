@@ -63,6 +63,7 @@ module.exports.getPageContent = async function getPageContent(page, pageContent)
             await homeButtonsLoop(page, pageContent, pagesUnsorted, buttonsCount);
             /// loop through main menu buttons
             await buttonsLoop(page, navigation, pageContent, pagesUnsorted);
+            console.log(footerNavigation);
             /// loop through footer buttons
             await buttonsLoop(page, footerNavigation, pageContent, pagesUnsorted); //na second lang to wywala
 
@@ -97,20 +98,24 @@ async function buttonsLoop(page, navigation, pageContent, pagesUnsorted) { ///Ev
         let surveClicked = false;
         for(let i = 0; i < navigation.length; i++) {
             if (navigation[i].type === 'id') {
+                console.log('Checkpoint first if')
                 await page.click(`#${navigation[i].id}`);
             }
             else {
                 if (navigation[i].id === 'text-online-security' && !surveClicked) {
+                     console.log('CHeckpoint second if');
                     await page.click(`.${navigation[i].id}`);
                     surveClicked = true;
                 } else if (navigation[i].id === 'text-online-security' && surveClicked) {
+                    console.log('Checkpoint 3rd if');
                     await page.evaluate(() => {
                         const surveyLink = document.getElementsByClassName('text-online-security')[1];
                         surveyLink.click();
                     })
                 }
                 else {
-                    await page.click(`.${navigation[i].id}`);
+                    console.log('checkpoint last if');
+                    await page.click(`.${navigation[i].id}`); // no selector found for .text-webchat
                 }
             }
             await checkPages(page, navigation[i].title, pageContent, pagesUnsorted)

@@ -2,7 +2,7 @@ const createTable = require('./Utilities/CreateTable');
 const titleTextPageConverter = require('./Utilities/titleTextPageConverter');
 
 module.exports.saveFooterToWorksheet = function saveFooterToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
-    if (pageContent.footer.length != null) {
+    if (pageContent.footer) {
         const ws = wb.addWorksheet('Footer');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'FM', pageContent.footer, pageContentSecond.footer, 2, 1);
@@ -10,7 +10,7 @@ module.exports.saveFooterToWorksheet = function saveFooterToWorksheet(wb, styles
 }
 
 module.exports.saveNeedAssistanceBarToWorksheet = function saveNeedAssistanceBarToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
-    if (pageContent.needAssistanceBar != null) {
+    if (pageContent.needAssistanceBar) {
         const ws = wb.addWorksheet('Need Assistance Bar');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'NAB', pageContent.needAssistanceBar, pageContentSecond.needAssistanceBar, 2, 1);
@@ -18,7 +18,7 @@ module.exports.saveNeedAssistanceBarToWorksheet = function saveNeedAssistanceBar
 }
 
 module.exports.saveUserMenuToWorksheet = function saveUserMenuToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
-    if (pageContent.userMenu != null) {
+    if (pageContent.userMenu) {
         const ws = wb.addWorksheet('User Menu');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'UM', pageContent.userMenu, pageContentSecond.userMenu, 2, 1);
@@ -26,7 +26,7 @@ module.exports.saveUserMenuToWorksheet = function saveUserMenuToWorksheet(wb, st
 }
 
 module.exports.saveMessageToWorksheet = function saveMessageToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
-    if (pageContent.messagePage != null) {
+    if (pageContent.messagePage) {
         const ws = wb.addWorksheet('My Messages Page');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'MMP', pageContent.messagePage, pageContentSecond.messagePage, 2, 1);
@@ -34,7 +34,7 @@ module.exports.saveMessageToWorksheet = function saveMessageToWorksheet(wb, styl
 }
 
 module.exports.saveLoginPageToWorksheet = function saveLoginPageToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
-    if (pageContent.loginPage != null) {
+    if (pageContent.loginPage) {
         const ws = wb.addWorksheet('Login Page');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'LP',pageContent.loginPage, pageContentSecond.loginPage, 2, 1);

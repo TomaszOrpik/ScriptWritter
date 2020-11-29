@@ -133,7 +133,7 @@ function Start() {
             catch(e) { SelectorExist = messageBox.messageBox('Page didnt load correctly', false); }
         };
         /// get English page data
-        await getPageContent.getPageContent(page, pageContent);
+        //await getPageContent.getPageContent(page, pageContent); ///TEMP FOR SECOND LANG TEST
         //test console log
         console.log(pageContent);
 
