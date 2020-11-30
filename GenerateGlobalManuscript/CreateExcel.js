@@ -19,8 +19,6 @@ module.exports.createExcel = function CreateExcel(clientName, localizationName, 
     /// Styles definitions
     const styles = addStyles.addStyles(wb, clientColor);
 
-    ///1.login2.BenefitOverview - stringi3.Enrollent4.Profile5.Footer6.Claims7.TRS8.OtherPages
-
     /// create Login Page worksheet
     createWorksheets.saveLoginPageToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName);
     /// create Forgot Password worksheet
@@ -36,7 +34,7 @@ module.exports.createExcel = function CreateExcel(clientName, localizationName, 
     /// create Footer worksheet
     createWorksheets.saveFooterToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName);
     /// create Profile Page worksheet
-    //saveProfilePageToExcel.saveProfileToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName); //ERROR ///TO DO (Cannot read 0 of undefined)
+    saveProfilePageToExcel.saveProfileToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName);
     /// create Message Page worksheet
     createWorksheets.saveMessageToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName);
     /// create Home Page worksheet
@@ -48,23 +46,22 @@ module.exports.createExcel = function CreateExcel(clientName, localizationName, 
     /// create Claim Submit Worksheet
     saveClaimSubmitToWorksheet.saveClaimSubmitToWorksheet(wb, styles, pageContent, isSecond, pageContentSecond, localizationName);
     /// create Upload Document worksheet
-    //createWorksheets.saveUploadDocumentToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName); //ERROR ///TO DO
+    createWorksheets.saveUploadDocumentToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName);
     /// create Mobile Page worksheet
-    //createWorksheets.saveMobileToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName); //ERROR ///TO DO
+    createWorksheets.saveMobileToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName);
     /// create Wellbeing Page worksheet
     ///CODE
     /// create Enrollment Page worksheet
-    ///CODE                                                                                                                    ///TO ADD NOW
+    ///CODE                                                                                                                    ///TO ADD NOW !!!!!!!!!!!!!!!!!!!!!
     /// create Benefit Statement Worksheet
     //saveBenefitStatementToExcel.saveBenefitStatementToWorksheet(wb, styles, pageContent, isSecond, pageContentSecond, localizationName); ///TO DO
     /// create Trs Page worksheet
     ///CODE
     /// create general Pages worksheets
-    saveGeneralPagesToExcel.saveGeneralPagesToWorksheet(wb, styles, pageContent, isSecond, pageContentSecond, localizationName); ///NOT FINISH CHECK NOTES IN FILE
+    saveGeneralPagesToExcel.saveGeneralPagesToWorksheet(wb, styles, pageContent, isSecond, pageContentSecond, localizationName);
 
     const path = dialog.showSaveDialogSync(null, {
         defaultPath: desktopPath+name
     });
-
     wb.write(path);
 }

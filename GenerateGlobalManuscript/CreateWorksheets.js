@@ -11,6 +11,7 @@ module.exports.saveFooterToWorksheet = function saveFooterToWorksheet(wb, styles
 
 module.exports.saveNeedAssistanceBarToWorksheet = function saveNeedAssistanceBarToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
     if (pageContent.needAssistanceBar) {
+        console.log('a');
         const ws = wb.addWorksheet('Need Assistance Bar');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'NAB', pageContent.needAssistanceBar, pageContentSecond.needAssistanceBar, 2, 1);
@@ -19,6 +20,7 @@ module.exports.saveNeedAssistanceBarToWorksheet = function saveNeedAssistanceBar
 
 module.exports.saveUserMenuToWorksheet = function saveUserMenuToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
     if (pageContent.userMenu) {
+        console.log('a');
         const ws = wb.addWorksheet('User Menu');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'UM', pageContent.userMenu, pageContentSecond.userMenu, 2, 1);
@@ -35,6 +37,7 @@ module.exports.saveMessageToWorksheet = function saveMessageToWorksheet(wb, styl
 
 module.exports.saveLoginPageToWorksheet = function saveLoginPageToWorksheet(wb, styles, pageContent, pageContentSecond, localizationName) {
     if (pageContent.loginPage) {
+        console.log('a');
         const ws = wb.addWorksheet('Login Page');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         createTable.createTable(ws, styles, 'LP',pageContent.loginPage, pageContentSecond.loginPage, 2, 1);

@@ -3,7 +3,7 @@ const increase = require('./Utilities/IncreaseCount');
 
 module.exports.saveProfileToWorksheet = function saveProfileToWorksheet(wb, styles, pageContent, isSecond, pageContentSecond, localization) {
     const profile = pageContent.profilePage;
-    if (profile != null) {
+    if (profile) {
         let freeColumnTrack = 1;
         const ws = wb.addWorksheet('Profile');
         const profileSecond = isSecond ? pageContentSecond.profilePage : null;
@@ -14,7 +14,7 @@ module.exports.saveProfileToWorksheet = function saveProfileToWorksheet(wb, styl
             }
             profile[i].inputs.push(profile[i].warning);
             profile[i].inputs.push(profile[i].title);
-            if (profileSecond != null) {
+            if (profileSecond) {
                 profileSecond[i].inputs.push(profileSecond[i].warning);
                 profileSecond[i].inputs.push(profileSecond[i].title);
             }

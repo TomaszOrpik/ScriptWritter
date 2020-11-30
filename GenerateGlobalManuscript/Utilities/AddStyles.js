@@ -51,7 +51,7 @@ module.exports.addStyles = function addStyles(wb, mainColor) {
             numberFormat: '$#,##0.00; ($#,##0.00); -',
             fill: {
                 type: "pattern",
-                bgColor: '#FF0000' //main color
+                bgColor: mainColor
             }
         })
     ]

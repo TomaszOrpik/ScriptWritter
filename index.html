@@ -18,7 +18,7 @@
     <div class="main">
         <div class="titleBar">
             <div class="iconTitleBar">
-                <img src="Images/logo.png" alt="icon" width="120" height="60" />
+                <img src="Images/logo.png" alt="icon" width="120" height="120" style="margin-top: -70px;"/>
             </div>
             <button id="closeBtn" class="closeTitleBar" onclick="Close()">X</button>
         </div>
@@ -76,27 +76,40 @@
                             <label id="colLab" for="colorPicker" class="form__label">Heading Color</label>
                             <div class="select-box">
                                 <div class="select-box__current" tabindex="1">
-                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="0" value="1" name="Ben" checked="checked" />
-                                        <p class="select-box__input-text">Cream</p>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="0" value="#000000" name="Ben" checked="checked" onclick="SetColor(this)" />
+                                        <p class="select-box__input-text">Black</p>
                                     </div>
-                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="1" value="2" name="Ben" />
-                                        <p class="select-box__input-text">Cheese</p>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="1" value="#FFFFFF" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">White</p>
                                     </div>
-                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="2" value="3" name="Ben" />
-                                        <p class="select-box__input-text">Milk</p>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="2" value="#FF0000" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">Red</p>
                                     </div>
-                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="3" value="4" name="Ben" />
-                                        <p class="select-box__input-text">Honey</p>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="3" value="#FFFF00" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">Yellow</p>
                                     </div>
-                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="4" value="5" name="Ben" />
-                                        <p class="select-box__input-text">Toast</p>
-                                    </div><img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon" aria-hidden="true" /></div>
-                                <ul class="select-box__list" style="z-index: 200; overflow-y: scroll;">
-                                    <li><label class="select-box__option" for="0" aria-hidden="aria-hidden">Cream</label></li>
-                                    <li><label class="select-box__option" for="1" aria-hidden="aria-hidden">Cheese</label></li>
-                                    <li><label class="select-box__option" for="2" aria-hidden="aria-hidden">Milk</label></li>
-                                    <li><label class="select-box__option" for="3" aria-hidden="aria-hidden">Honey</label></li>
-                                    <li><label class="select-box__option" for="4" aria-hidden="aria-hidden">Toast</label></li>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="4" value="#0066CC" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">Blue</p>
+                                    </div>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="5" value="#800080" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">Violet</p>
+                                    </div>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="6" value="#008000" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">Green</p>
+                                    </div>
+                                    <div class="select-box__value"><input class="select-box__input" type="radio" id="7" value="#FF9900" name="Ben" onclick="SetColor(this)"/>
+                                        <p class="select-box__input-text">Orange</p>
+                                    </div>
+                                    <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon" aria-hidden="true" /></div>
+                                <ul class="select-box__list" style="z-index: 200; overflow-y: scroll; max-height: 250px">
+                                    <li><label class="select-box__option" for="0" aria-hidden="aria-hidden">Black</label></li>
+                                    <li><label class="select-box__option" for="1" aria-hidden="aria-hidden">White</label></li>
+                                    <li><label class="select-box__option" for="2" aria-hidden="aria-hidden">Red</label></li>
+                                    <li><label class="select-box__option" for="3" aria-hidden="aria-hidden">Yellow</label></li>
+                                    <li><label class="select-box__option" for="4" aria-hidden="aria-hidden">Blue</label></li>
+                                    <li><label class="select-box__option" for="5" aria-hidden="aria-hidden">Violet</label></li>
+                                    <li><label class="select-box__option" for="6" aria-hidden="aria-hidden">Green</label></li>
+                                    <li><label class="select-box__option" for="7" aria-hidden="aria-hidden">Orange</label></li>
                                 </ul>
                             </div>
                         </div>

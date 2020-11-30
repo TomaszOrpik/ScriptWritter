@@ -6,6 +6,7 @@ module.exports.saveClaimSubmitToWorksheet = function saveClaimSubmitToWorksheet(
     let nextRow = 0;
     const doubleIsSecond = isSecond && pageContentSecond.claimSubmitPage != null ? true : false;
     if (submit != null) {
+        console.log('a')
         const ws = wb.addWorksheet('Claim Submit');
         createTable.createHeader(ws, localizationName, styles, 1, 1);
         /// page text
