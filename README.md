@@ -4,6 +4,11 @@ Node js + puppeteer app to scrap data from websites
 # Introduction
 App was created to speed app testing process of AON clients websites. The users inputs main data to login into website (like url address and test employee account) than app opens chromium instance of browser to scrap all the website HTML code and turn it into user friendly xslx/docx script to compare and localize translation and naming issues.
 
+# Demo
+- [One Language Build Download Link](https://drive.google.com/file/d/1_xFkz7s2jh0NeKjkBzaZF8xWrIc2PNSN/view?usp=sharing)
+- [Two Languages Build Download Link](https://drive.google.com/file/d/1Zx4w98eGASDsdepItNGYcTtXA05h2lfB/view?usp=sharing)
+
+
 # Setup
 To debug application:
 1. Make sure you've got nodeJs installed by typing `node -b` in command line
