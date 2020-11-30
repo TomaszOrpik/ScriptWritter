@@ -5,23 +5,30 @@ module.exports.navbarSection = function navbarSection(localizationName, pageCont
 
     const userMenuRows = [];
     userMenuRows.push(genThreePool.genThreePoolRow('', 'English', localizationName, true));
-    for (let i = 0; i<userMenu.length; i++) {
-        const translation = pageContentSecond.userMenu[i] ? pageContentSecond.userMenu[i] : " ";
+    for (let i = 0; i<pageContent.userMenu.length; i++) {
+        const translation = pageContentSecond.userMenu ? pageContentSecond.userMenu[i] : " ";
         userMenuRows.push(genThreePool.genThreePoolRow('', pageContent.userMenu[i], translation, false));
     }
     
     const mainMenuRows = [];
     mainMenuRows.push(genThreePool.genThreePoolRow('', 'English', localizationName, true));
-    for (let i = 0; i<mainMenu.length; i++) {
-        const translation = pageContentSecond.mainMenu[i] ? pageContentSecond.mainMenu[i] : " ";
+    for (let i = 0; i<pageContent.mainMenu.length; i++) {
+        const translation = pageContentSecond.mainMenu ? pageContentSecond.mainMenu[i] : " ";
         mainMenuRows.push(genThreePool.genThreePoolRow('', pageContent.mainMenu[i], translation, false));
     }
 
     const footerRows = [];
     footerRows.push(genThreePool.genThreePoolRow('', 'English', localizationName, true));
-    for (let i = 0; i < footer.length; i++) {
-        const translation = pageContentSecond.footer[i] ? pageContentSecond.footer[i] : " ";
+    for (let i = 0; i < pageContent.footer.length; i++) {
+        const translation = pageContentSecond.footer ? pageContentSecond.footer[i] : " ";
         footerRows.push(genThreePool.genThreePoolRow('', pageContent.footer[i], translation, false));
+    }
+
+    const needAssistanceRows = [];
+    needAssistanceRows.push(genThreePool.genThreePoolRow('', 'English', localizationName, true));
+    for (let i = 0; i < pageContent.needAssistanceBar.length; i++) {
+        const translation = pageContentSecond.needAssistanceBar ? pageContentSecond.needAssistanceBar[i] : " ";
+        needAssistanceRows.push(genThreePool.genThreePoolRow('', pageContent.needAssistanceBar[i], translation, false));
     }
 
     return {
@@ -47,24 +54,7 @@ module.exports.navbarSection = function navbarSection(localizationName, pageCont
                 outlineLevel: 2
             }),
             new docx.Table({
-                rows: [
-                    genThreePool.genThreePoolRow('', 'English', localizationName, true),
-                    genThreePool.genThreePoolRow(
-                        'Button', needAssistanceBar[0].text, needAssistanceBar[0].translation, false
-                    ),
-                    genThreePool.genThreePoolRow(
-                        '', needAssistanceBar[1].text, needAssistanceBar[1].translation, false
-                    ),
-                    genThreePool.genThreePoolRow(
-                        '', needAssistanceBar[2].text, needAssistanceBar[2].translation, false
-                    ),
-                    genThreePool.genThreePoolRow(
-                        '', needAssistanceBar[3].text, needAssistanceBar[3].translation, false
-                    ),
-                    genThreePool.genThreePoolRow(
-                        '', needAssistanceBar[4].text, needAssistanceBar[4].translation, false
-                    )
-                ],
+                rows: needAssistanceRows,
                 width: {
                     size: 9250,
                     type: docx.WidthType.DXA

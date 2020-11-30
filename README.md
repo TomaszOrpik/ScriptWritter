@@ -12,20 +12,18 @@ To debug application:
 
 ### Debug
 For debug navigate to app directory and type `npm run start` in command line.
+Press `ctrl + shift + I` in app screen to open debug tools.
 
 ### Build
 For build navigate to app directory and type `npm run build` in command line - This will create exe file in installer folder.
 
 # Technologies
 Technologies used in application:
-[NodeJS](https://nodejs.org/en/)
-[ElectronJS](https://www.electronjs.org/)
-[Puppeteer](https://pptr.dev/)
-[Excel4Node](https://www.npmjs.com/package/excel4node)
-[Docx](https://www.npmjs.com/package/docx)
-
-# Code Overview
-
+- [NodeJS](https://nodejs.org/en/)
+- [ElectronJS](https://www.electronjs.org/)
+- [Puppeteer](https://pptr.dev/)
+- [Excel4Node](https://www.npmjs.com/package/excel4node)
+- [Docx](https://www.npmjs.com/package/docx)
 
 # Build Status
 

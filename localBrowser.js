@@ -135,31 +135,31 @@ function Start() {
         console.log(pageContent);
 
         ///second language ///quoted for testing purpose
-        // if(langNumber > 1) {
-        //     try { await page.waitForSelector('select[id="ddlLanguage"]', { timeout: 1000 }); }
-        //     catch(e) { SelectorExist = messageBox.messageBox('Couldnt Load second language!', false); }
-        //     if (SelectorExist) {
-        //         await page.select('select[id="ddlLanguage"]', langB);
-        //         await getPageContent.getPageContent(page, pageContentSecond);
-        //         ///logout
-        //         await page.evaluate(() => {
-        //             const logout = document.querySelector('i.fa.fa-sign-out');
-        //             logout.click();
-        //         })
-        //         /// get login page data
-        //         const loginSecond = await getLoginPage.getLoginPage(page, pageContent);
-        //         pageContentSecond.loginPage = loginSecond;
-        //         /// get forget password page data
-        //         ///CODE HERE
-        //         ///test console log
-        //         console.log(pageContentSecond);
-        //     }
-        // }
+        if(langNumber > 1) {
+            try { await page.waitForSelector('select[id="ddlLanguage"]', { timeout: 1000 }); }
+            catch(e) { SelectorExist = messageBox.messageBox('Couldnt Load second language!', false); }
+            if (SelectorExist) {
+                await page.select('select[id="ddlLanguage"]', langB);
+                await getPageContent.getPageContent(page, pageContentSecond);
+                ///logout
+                await page.evaluate(() => {
+                    const logout = document.querySelector('i.fa.fa-sign-out');
+                    logout.click();
+                })
+                /// get login page data
+                const loginSecond = await getLoginPage.getLoginPage(page, pageContent);
+                pageContentSecond.loginPage = loginSecond;
+                /// get forget password page data
+                ///CODE HERE
+                ///test console log
+                console.log(pageContentSecond);
+            }
+        }
         /// close browser
         await browser.close();
         /// save data to files
         generateLocalManuscript.createDocument(clientName, localizationName, version, reviewedBy, pageContent, pageContentSecond, clientColor);
-        generateGlobalManuscript.createExcel(clientName, localizationName, version, reviewedBy, pageContent, pageContentSecond, clientColor);
+        generateGlobalManuscript.createExcel(clientName, localizationName, version, pageContent, pageContentSecond, clientColor);
     })
     ();
 }

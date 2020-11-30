@@ -169,7 +169,7 @@ module.exports.homeSection = function homeSection(doc, localizationName, homePag
     rows3.push(genThreePool.genThreePoolRow('', 'English', localizationName, true));
     if(!homePageSecond) {
         for(let i = 0; i < homePageEng.modules.length; i++) {
-            rows3.push(genThreePool.genThreePoolRow('Title', homePageEng.modules[i].moduleTitle, homePageSecond.modules[i].moduleTitle, true));
+            rows3.push(genThreePool.genThreePoolRow('Title', homePageEng.modules[i].moduleTitle, " ", true));
             for(let j = 0; j < homePageEng.modules[i].moduleText.length; j++) {
                 rows3.push(new docx.TableRow({
                     children: [
